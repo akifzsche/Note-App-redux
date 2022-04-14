@@ -3,22 +3,10 @@ import { Button, Input, Space } from 'antd';
 import { AudioOutlined } from '@ant-design/icons';
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addNote } from '../redux/NotesSlice'
+import { addNote, FilterNote } from '../redux/NotesSlice'
 const { TextArea } = Input;
-
-
 const { Search } = Input;
 
-const suffix = (
-    <AudioOutlined
-        style={{
-            fontSize: 16,
-            color: '#1890ff',
-        }}
-    />
-);
-
-const onSearch = value => console.log(value);
 
 
 function Content() {
@@ -39,6 +27,11 @@ function Content() {
 
 
 
+    const onSearch = (value) => {
+        dispatch(FilterNote(value))
+
+    }
+
     return (
         <div>
 
@@ -54,7 +47,7 @@ function Content() {
             <br />
             <br />
             <Space direction="vertical">
-                <Search placeholder="input search text" onSearch={onSearch} style={{ width: 400 }} />
+                <Search onSearch={onSearch} style={{ width: 400 }} placeholder='Search Note' />
             </Space>
         </div>
     )

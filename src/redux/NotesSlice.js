@@ -26,6 +26,7 @@ export const NotesSlice=createSlice({
             reducer: (state, action) => {
                 //addTodo'nun amacı state'in altındaki items objesini pushlamak
                 state.notes.push(action.payload);
+            
             },
             //prepare'ın yaptığı şey: reducers state'i değiştirmeden önce siz ona gelecek olan payload'u yapılandırabiliyorsun demek.
 
@@ -41,9 +42,16 @@ export const NotesSlice=createSlice({
                 }
             }
         },
+        FilterNote:{
+            reducer: (state, action) => {
+                state.ActiveFilter = action.payload;
+                
+        },
+      
+    }
     }
 
 })
-export const { addNote } = NotesSlice.actions;
+export const { addNote,FilterNote } = NotesSlice.actions;
 
 export default NotesSlice.reducer;
