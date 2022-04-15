@@ -7,7 +7,7 @@ import { addNote, FilterNote } from '../redux/NotesSlice'
 const { TextArea } = Input;
 const { Search } = Input;
 
-
+var data = [];
 
 function Content() {
     const [title, setTitle] = useState('')
@@ -19,6 +19,13 @@ function Content() {
         e.preventDefault()
         //input boşsa göndermiyoruz
         if (!title || !content) return;
+
+        if (localStorage.getItem("items") != null) {
+            data = JSON.parse(localStorage.getItem("items"));
+        }
+
+        data.push({ title: title, content: content })
+        localStorage.setItem("items", JSON.stringify(data));
 
         dispatch(addNote({ title, content }))
         setTitle('')

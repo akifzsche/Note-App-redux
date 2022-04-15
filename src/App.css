@@ -1,12 +1,27 @@
 .App {
-  background-color: #104618;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #575fcf;
+  color: white;
+  padding: 2em;
+  border-radius: 30px;
+  width: 100%;
+  max-width: 600px;
+  margin: 1em;
+  text-align: center;
+  
+}
+.main {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: rgb(0, 0, 0);
+  color: #000000;
+  background-color: #0fbcf9;
 }
 
 @import '~antd/dist/antd.css';
+

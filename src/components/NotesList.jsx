@@ -7,40 +7,46 @@ function NotesList() {
 
     const notes = useSelector(state => state.notes.notes)
     const FilteredText = useSelector(state => state.notes.ActiveFilter)
-
-    const filtered = notes.filter((item) => {
-        return Object.keys(item).some((key) =>
-            item[key].toString().toLowerCase().includes(FilteredText.toLowerCase())
-        )
-    })
+    const temp = JSON.parse(localStorage.getItem("items"));
+    var ActiveFilter = false
 
 
+    if (temp != null || temp != undefined) {
+        var filtered = temp.filter((item) => {
+            if (FilteredText)
+                ActiveFilter = true
+            return Object.keys(item).some((key) =>
+                item[key].toString().toLowerCase().includes(FilteredText.toLowerCase())
+            )
+
+        })
+    }
+
+    console.log(ActiveFilter)
     return (
         <>
             <Divider orientation="center" style={{ fontSize: "22px" }}>Notes  </Divider >
             <Row gutter={0}>
                 {
-                    FilteredText == null && notes.map(note => (
-                        <Col className="gutter-row" >
+                    //silme
+                    temp != null && ActiveFilter == false && temp.map((filtered, index) =>
+                        <Card
+                            style={{ width: "250px", margin: "10px", height: "200px" }}
+                            key={index}
+                            title={filtered.title}
+                            className={style.zoom}
+                            extra={<a href="#">Delete</a>}>
+                            <a href="#/" >
+                                <p style={{ color: "black" }}>
+                                    {filtered.content}
+                                </p>
+                            </a>
+                        </Card>
+                    )
 
-                            <Card
-                                style={{ width: "250px", margin: "10px", height: "200px" }}
-                                key={note.id}
-                                title={note.title}
-                                className={style.zoom}
-                                extra={<a href="#">Delete</a>}>
-                                <a href="#/" >
-                                    <p style={{ color: "black" }}>
-                                        {note.content}
-                                    </p>
-                                </a>
-                            </Card>
-
-                        </Col>
-                    ))
                 }
                 {
-                    FilteredText != null && filtered.map((filtered, index) =>
+                    temp != null && ActiveFilter == true && filtered.map((filtered, index) =>
                         <Card
                             style={{ width: "250px", margin: "10px", height: "200px" }}
                             key={index}
