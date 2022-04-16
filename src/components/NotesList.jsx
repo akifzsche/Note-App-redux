@@ -23,6 +23,7 @@ function NotesList() {
         })
     }
 
+
     return (
         <>
             <Divider orientation="center" style={{ fontSize: "22px" }}>Notes  </Divider >
