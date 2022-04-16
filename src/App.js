@@ -5,15 +5,19 @@ import Header from './components/Header';
 
 function App() {
   return (
-    <div className='main'>
-        <Header/>
-    <div className='App'>
+    // <div className='main'>
+        
+    // <div className='App'>
   
-      <Content/> 
+      
      
-    </div>
-     <NotesList/>
-     </div>
+    // </div>
+     
+    //  </div>
+    <section className="layout">
+  <div className="sidebar"><Content/> </div>
+  <div className="body"><Header/><NotesList/></div>
+</section>
   );
 }
 

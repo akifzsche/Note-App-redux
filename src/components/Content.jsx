@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { nanoid } from '@reduxjs/toolkit'
 import { useDispatch, useSelector } from 'react-redux'
 import { addNote, FilterNote } from '../redux/NotesSlice'
-
+import './style.css'
 const { TextArea } = Input;
 const { Search } = Input;
 
@@ -47,25 +47,29 @@ function Content() {
     }
 
     return (
-        <div>
+        <div className='card'>
 
-            <Input placeholder="Title" onChange={(e) => setTitle(e.target.value)} />
+            <Input placeholder="Title" onChange={(e) => setTitle(e.target.value)} className="input" />
             <br />
             <br />
             <TextArea rows={5} style={{ "width": "400px" }} value={content}
-                onChange={(e) => setContent(e.target.value)} placeholder="Note" />
+                onChange={(e) => setContent(e.target.value)} placeholder="Note" className="input" />
             <br />
+            <br />
+
 
 
             <Button type="primary" onClick={handleSubmit}>Send</Button>
             <br />
             <br />
             <Space direction="vertical">
-                <Search onSearch={onSearch} style={{ width: 400 }} placeholder='Search Note' />
+                <Search onSearch={onSearch} style={{ width: 400 }} placeholder='Search Note' className="input" />
             </Space>
 
+            <div className='ortala'>
+                <CirclePicker color={color} onChangeComplete={handleChangeComplete} />
+            </div>
 
-            <CirclePicker color={color} onChangeComplete={handleChangeComplete} />
         </div>
     )
 }

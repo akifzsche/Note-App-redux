@@ -31,7 +31,7 @@ function NotesList() {
                     //silme
                     temp != null && ActiveFilter == false && temp.map((filtered, index) =>
                         <Card
-                            style={{ width: "250px", margin: "10px", height: "200px", background: filtered.background, border: "1px solid black" }}
+                            style={{ width: "250px", margin: "10px", height: "200px", background: filtered.background, border: "1px solid black", borderRadius: "21px" }}
                             key={index}
                             title={filtered.title}
                             className={style.zoom}
@@ -48,7 +48,7 @@ function NotesList() {
                 {
                     temp != null && ActiveFilter == true && filtered.map((filtered, index) =>
                         <Card
-                            style={{ width: "250px", margin: "10px", height: "200px", background: filtered.background, border: "1px solid black" }}
+                            style={{ width: "250px", margin: "10px", height: "200px", background: filtered.background, border: "1px solid black", borderRadius: "21px" }}
                             key={index}
                             title={filtered.title}
                             className={style.zoom}
