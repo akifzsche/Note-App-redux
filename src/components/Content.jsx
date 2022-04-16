@@ -1,9 +1,11 @@
-import React from 'react'
+import { CirclePicker } from 'react-color';
 import { Button, Input, Space } from 'antd';
 import { AudioOutlined } from '@ant-design/icons';
 import { useState } from 'react'
+import { nanoid } from '@reduxjs/toolkit'
 import { useDispatch, useSelector } from 'react-redux'
 import { addNote, FilterNote } from '../redux/NotesSlice'
+
 const { TextArea } = Input;
 const { Search } = Input;
 
@@ -12,6 +14,7 @@ var data = [];
 function Content() {
     const [title, setTitle] = useState('')
     const [content, setContent] = useState('')
+    const [color, setColor] = useState('')
 
     const dispatch = useDispatch()
 
@@ -24,12 +27,16 @@ function Content() {
             data = JSON.parse(localStorage.getItem("items"));
         }
 
-        data.push({ title: title, content: content })
+        data.push({ title: title, content: content, id: nanoid(), background: color.hex })
         localStorage.setItem("items", JSON.stringify(data));
 
-        dispatch(addNote({ title, content }))
+        dispatch(addNote({ title, content, color }))
         setTitle('')
         setContent('')
+    }
+    const handleChangeComplete = (color) => {
+        setColor(color);
+        console.log(color.hex)
     }
 
 
@@ -56,6 +63,9 @@ function Content() {
             <Space direction="vertical">
                 <Search onSearch={onSearch} style={{ width: 400 }} placeholder='Search Note' />
             </Space>
+
+
+            <CirclePicker color={color} onChangeComplete={handleChangeComplete} />
         </div>
     )
 }

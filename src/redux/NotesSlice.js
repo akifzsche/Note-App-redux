@@ -1,24 +1,12 @@
 import { createSlice,nanoid } from "@reduxjs/toolkit";
 
-
+const temp = JSON.parse(localStorage.getItem("items"));
 export const NotesSlice=createSlice({
     name:"notes",
     initialState:{
-        notes:[
-            {
-                id: 1,
-                title: 'Birinci Not',
-                content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quidem.'
-               
-            },
-            {
-                id: 2,
-                title: 'İkinci Not',
-                content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quidem.'
-                
-            }
-        ],
+        notes:[],
         ActiveFilter: "",
+
     },
 
     reducers:{
@@ -31,12 +19,13 @@ export const NotesSlice=createSlice({
             //prepare'ın yaptığı şey: reducers state'i değiştirmeden önce siz ona gelecek olan payload'u yapılandırabiliyorsun demek.
 
             //addtodoya gelen dispatch ilk prepare'a ondan sonra reducer'a ve reducer altındaki action'a düşecek.
-            prepare: ({ title,content }) => {
+            prepare: ({ title,content,color }) => {
                 return {
                     payload: {
                         id: nanoid(),
                         title,
                         content,
+                        color,
                         
                     }
                 }
@@ -48,10 +37,20 @@ export const NotesSlice=createSlice({
                 
         },
       
+    },destroyNote:{
+        reducer:(state,action)=>{
+            const id=action.payload;
+
+            const filtered=temp.filter(item=>item.id!==id);
+
+            localStorage.setItem("items",JSON.stringify(filtered));
+            state.notes=filtered;
+        }
     }
+
     }
 
 })
-export const { addNote,FilterNote } = NotesSlice.actions;
+export const { addNote,FilterNote,destroyNote } = NotesSlice.actions;
 
 export default NotesSlice.reducer;
